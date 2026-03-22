@@ -1,25 +1,23 @@
-4 5
-SBCDA
-OFGHD
-PJKLE
-ARTEL
-3
-SOPA
-LETRA
-EDA
-8 10
-EABDFGHJNM
-SASDDFOCVB
-TXSCSFTCAQ
-EZVFACILSD
-AQWUHNUFSV
-PROBLEMADA
-HCVDASEFVB
-WMLFACIFSD
 5
-ESTE
-PROBLEMA
-FICA
-MUITO
-FACIL
-0 0
+maca
+lima
+cama
+mila
+texto
+3
+caras
+casar
+sacar
+1
+teste
+9
+elvis
+lives
+diogo
+digoo
+odigo
+francsica
+afrancisc
+cafrancis
+scafranci
+0
