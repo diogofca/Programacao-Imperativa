@@ -1,0 +1,22 @@
+5
+Joao Maria
+jmaria@nodomain.pt
+19900304
+934567899
+Mario Azevedo
+mjoao@nodomain.pt
+20001112
+957634567
+Francisca Silva
+xicos@nodomain.pt
+20030320
+967676767
+Anabela Feliz
+afeliz@nodomain.pt
+20051125
+987587761
+Ana Feliz
+rleao@nodomain.pt
+20050116
+919191911
+1
