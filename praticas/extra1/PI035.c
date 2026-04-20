@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#define MAX_STRING 1000
+#include <ctype.h>
+#define MAX_STRING 100
+
+bool CompareContactsFinal(char *a, char *b);
 struct Contact
 // this is stricking
 {
@@ -11,9 +14,7 @@ struct Contact
     int phone;
 };
 
-#include <ctype.h>
-
-bool compareNames(char *a, char *b)
+bool compareNames1(char *a, char *b)
 {
     while (*a || *b)
     {
@@ -98,7 +99,7 @@ bool compareNames(char *a, char *b)
 
 bool compareContacts(struct Contact a, struct Contact b)
 {
-    return compareNames1(a.name, b.name);
+    return CompareContactsFinal(a.name, b.name);
 }
 void swap(int *a, int *b)
 {
@@ -106,20 +107,115 @@ void swap(int *a, int *b)
     *a = *b;
     *b = temp;
 }
+int wordleghtSpace(char *name)
+{
+    int counter = 0;
+    while (*name != ' ' && *name != '\0')
+    {
+        counter += 1;
+        name += 1;
+    }
+    return counter;
+}
+
+bool equalStrigs(char *a, char *b, int al, int bl)
+{
+    for (int i = 0; i < al; i++)
+    {
+        if (a[i] != b[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool CompareContactsFinal(char *a, char *b)
+{
+    int al = wordleghtSpace(a);
+    int bl = wordleghtSpace(b);
+    if (al == bl && equalStrigs(a, b, al, bl))
+    {
+        // do nothing
+        // continue to the next pair of words
+        a = a + al;
+        b = b + al;
+    }
+    else
+    {
+        char name1[al + 1];
+        char name2[bl + 1];
+        for (int i = 0; i < al; i++)
+        {
+            name1[i] = a[i];
+        }
+        name1[al] = '\0';
+        for (int i = 0; i < bl; i++)
+        {
+            name2[i] = b[i];
+        }
+        name2[bl] = '\0';
+        // printf("%s %s\n", name1, name2);
+        return compareNames1(name1, name2);
+    }
+
+    while (true)
+    {
+        if (*a == '\0' && *b == '\0')
+        {
+            return true;
+        }
+        else if (*a == '\0')
+        {
+            return true;
+        }
+        else if (*b == '\0')
+        {
+            return false;
+        }
+        a += 1;
+        b += 1;
+        int aWordLenght = wordleghtSpace(a);
+        int bWordLenght = wordleghtSpace(b);
+        if (aWordLenght == bWordLenght && equalStrigs(a, b, aWordLenght, bWordLenght))
+        {
+            a = a + aWordLenght;
+            b = b + bWordLenght;
+            continue;
+        }
+        else
+        {
+            char name1[aWordLenght + 1];
+            char name2[bWordLenght + 1];
+            for (int i = 0; i < aWordLenght; i++)
+            {
+                name1[i] = a[i];
+            }
+            name1[aWordLenght] = '\0';
+            for (int i = 0; i < bWordLenght; i++)
+            {
+                name2[i] = b[i];
+            }
+            name2[bWordLenght] = '\0';
+            // printf("%s %s\n", name1, name2);
+            return compareNames1(name1, name2);
+        }
+    }
+}
 
 void sortContact(int n, struct Contact cc[n], int vv[n])
 {
     for (int i = 0; i < n; i++)
     {
-        int min = i;
+        int *min = &vv[i];
         for (int j = i; j < n; j++)
         {
-            if (compareContacts(cc[vv[j]], cc[vv[min]]))
+            if (compareContacts(cc[vv[j]], cc[*min]))
             {
-                min = j;
+                min = &vv[j];
             }
         }
-        swap(&vv[min], &vv[i]);
+        swap(min, &vv[i]);
     }
 }
 
@@ -164,7 +260,69 @@ int main()
     if (flag == 0)
     {
         char mes[MAX_STRING];
-        scanf("%s", mes);
+        int month;
+        scanf("%d", &month);
+        if (1 <= month && month <= 9)
+        {
+            mes[0] = '0';
+            switch (month)
+            {
+            case 1:
+                /* code */
+                mes[1] = '1';
+                break;
+            case 2:
+                /* code */
+                mes[1] = '2';
+                break;
+
+            case 3:
+                /* code */
+                mes[1] = '3';
+                break;
+            case 4:
+                /* code */
+                mes[1] = '4';
+                break;
+            case 5:
+                /* code */
+                mes[1] = '5';
+                break;
+            case 6:
+                /* code */
+                mes[1] = '6';
+                break;
+            case 7:
+                /* code */
+                mes[1] = '7';
+                break;
+            case 8:
+                /* code */
+                mes[1] = '8';
+                break;
+            case 9:
+                /* code */
+                mes[1] = '9';
+                break;
+            default:
+                break;
+            }
+        }
+        else if (month == 10)
+        {
+            mes[0] = '1';
+            mes[1] = '0';
+        }
+        else if (month == 11)
+        {
+            mes[0] = '1';
+            mes[1] = '1';
+        }
+        else
+        {
+            mes[0] = '1';
+            mes[1] = '2';
+        }
         int counter = 0;
         for (int i = 0; i < N; i++)
         {
@@ -181,9 +339,9 @@ int main()
     }
     else if (flag == 1)
     {
-        // char ll[] = "Diogo Almeida";
-        // char ll1[] = "Diogo Leite leite";
-        // printf("\n%d\n", compareNames(ll1, ll));
+        // char ll[] = "Zezere";
+        // char ll1[] = "Xai";
+        // printf("\n%d\n", CompareContactsFinal(ll, ll1));
         int vv[N];
         for (int i = 0; i < N; i++)
         {
